@@ -1,43 +1,59 @@
-import Container from "./Container";
-import Network from "./Network/Network";
+import Container from './Container';
+import Network from './Network/Network';
 
-export default
-class Application extends Container {
-    public version = '1.0';
-
-    private isBootstraped = false;
-    public kernel: Network | null = null;
-
-    // Once application is locked, we can't perform actions in any config settings.
-    private isLocked = false;
-
-    protected providers = [];
-    protected env = [];
-    protected configs = [];
-
-    public lock() {
-        this.isLocked = true;
+declare global {
+  namespace NodeJS {
+    interface Global {
+      name: String;
     }
+  }
+}
+export default class Application extends Container {
+  constructor() {
+    super();
+    this.loadGlobals();
+  }
 
-    public getInstance() {
-        return this.instance;
-    }
+  public version = '1.0';
 
-    public setKernel(kernel: Network) {
-        this.kernel = kernel;
-    }
+  private isBootstraped = false;
+  public kernel: Network | null = null;
 
-    private unLock() {
-        this.isLocked = false;
-    }
+  // Once application is locked, we can't perform actions in any config settings.
+  private isLocked = false;
 
-    public getConfigs(access: String = "") {
-        if (access === "") return this.configs;
-        
-        // handle everything...
-    }
+  protected providers = [];
+  protected env = [];
+  protected configs = [];
 
-    public getProviders() {
-        return this.getConfigs('app.providers');
-    }
+  public lock() {
+    this.isLocked = true;
+  }
+
+  public getInstance() {
+    return this.instance;
+  }
+
+  public setKernel(kernel: Network) {
+    this.kernel = kernel;
+  }
+
+  private unLock() {
+    this.isLocked = false;
+  }
+
+  public getConfigs(access: String = '') {
+    if (access === '') return this.configs;
+
+    // handle everything...
+  }
+
+  private loadGlobals() {
+    global.name = 'jhg';
+    console.log(global.name);
+  }
+
+  public getProviders() {
+    return this.getConfigs('app.providers');
+  }
 }

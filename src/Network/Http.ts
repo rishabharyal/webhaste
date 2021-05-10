@@ -1,8 +1,7 @@
 import { createServer, IncomingMessage, ServerResponse } from 'http';
 
-export default
-class Http {
-    public handle() {
-        console.log('here...');
-    }
+export default class Http {
+  public handle() {
+    console.log('here...', global.name);
+  }
 }
