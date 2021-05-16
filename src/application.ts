@@ -1,17 +1,10 @@
 import Container from './Container';
 import Network from './Network/Network';
 
-declare global {
-  namespace NodeJS {
-    interface Global {
-      name: String;
-    }
-  }
-}
+
 export default class Application extends Container {
   constructor() {
     super();
-    this.loadGlobals();
   }
 
   public version = '1.0';
@@ -46,11 +39,6 @@ export default class Application extends Container {
     if (access === '') return this.configs;
 
     // handle everything...
-  }
-
-  private loadGlobals() {
-    global.name = 'jhg';
-    console.log(global.name);
   }
 
   public getProviders() {

@@ -17,6 +17,13 @@ if (app.kernel === null) {
     throw "Kernel has not been set yet.";
 }
 
-console.log(app);
+declare global {
+    namespace NodeJS {
+        interface Global {
+            app: Application;
+        }
+    }
+}
+global.app = app;
 
 app.kernel.handle();
