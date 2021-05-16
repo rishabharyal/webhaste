@@ -1,43 +1,47 @@
-import Container from "./Container";
-import Network from "./Network/Network";
+import Container from './Container';
+import Network from './Network/Network';
 
-export default
-class Application extends Container {
-    public version = '1.0';
 
-    private isBootstraped = false;
-    public kernel: Network | null = null;
+export default class Application extends Container {
+  constructor() {
+    super();
+  }
 
-    // Once application is locked, we can't perform actions in any config settings.
-    private isLocked = false;
+  public version = '1.0';
 
-    protected providers = [];
-    protected env = [];
-    protected configs = [];
+  private isBootstraped = false;
+  public kernel: Network | null = null;
 
-    public lock() {
-        this.isLocked = true;
-    }
+  // Once application is locked, we can't perform actions in any config settings.
+  private isLocked = false;
 
-    public getInstance() {
-        return this.instance;
-    }
+  protected providers = [];
+  protected env = [];
+  protected configs = [];
 
-    public setKernel(kernel: Network) {
-        this.kernel = kernel;
-    }
+  public lock() {
+    this.isLocked = true;
+  }
 
-    private unLock() {
-        this.isLocked = false;
-    }
+  public getInstance() {
+    return this.instance;
+  }
 
-    public getConfigs(access: String = "") {
-        if (access === "") return this.configs;
-        
-        // handle everything...
-    }
+  public setKernel(kernel: Network) {
+    this.kernel = kernel;
+  }
 
-    public getProviders() {
-        return this.getConfigs('app.providers');
-    }
+  private unLock() {
+    this.isLocked = false;
+  }
+
+  public getConfigs(access: String = '') {
+    if (access === '') return this.configs;
+
+    // handle everything...
+  }
+
+  public getProviders() {
+    return this.getConfigs('app.providers');
+  }
 }
