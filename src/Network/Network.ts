@@ -17,4 +17,8 @@ class Network extends Http {
     protected namedMiddleware = {
         
     };
+
+    protected validations = [
+
+    ];
 }

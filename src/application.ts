@@ -31,17 +31,22 @@ export default class Application extends Container {
     this.kernel = kernel;
   }
 
+  public getEnv(key: string = '') {
+    if (key === '') return this.instance['env'];
+    return this.instance['env'][key];
+  }
+
   private unLock() {
     this.isLocked = false;
   }
 
-  public getConfigs(access: String = '') {
+  public getConfig(access: String = '') {
     if (access === '') return this.configs;
 
     // handle everything...
   }
 
   public getProviders() {
-    return this.getConfigs('app.providers');
+    return this.getConfig('app.providers');
   }
 }
